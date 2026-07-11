@@ -1,87 +1,65 @@
-const toggleButton = document.getElementById("toggleButton");
-const taskPanel = document.getElementById("taskPanel");
+const addButton = document.getElementById("addButton");
+const cancelButton = document.getElementById("cancelButton");
+const notePanel = document.getElementById("notePanel");
+const noteForm = document.getElementById("noteForm");
+const noteList = document.getElementById("noteList");
+const emptyState = document.getElementById("emptyState");
 
-toggleButton.addEventListener("click", function () {
-    taskPanel.classList.toggle("open");
+const titleInput = document.getElementById("title");
+const contentInput = document.getElementById("content");
+
+addButton.addEventListener("click", function () {
+    notePanel.classList.add("open");
 });
 
-const saveTaskButton = document.getElementById("saveTaskButton");
+cancelButton.addEventListener("click", function () {
+    notePanel.classList.remove("open");
+    noteForm.reset();
+});
 
-saveTaskButton.addEventListener("click", function () {
-
-    const taskInput = document.getElementById("taskName");
-    const taskDescription = document.getElementById("taskDescription");
-    const taskList = document.getElementById("taskList");
-
-    if (taskInput.value.trim() === "") {
-        alert("Please enter a task name.");
+noteForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    if (titleInput.value.trim() === "") {
+        alert("Please enter a title.");
         return;
+}
+
+    if (contentInput.value.trim() === "") {
+            alert("Please enter some content.");
+            return;
+    }
     }
 
-    const newTask = document.createElement("li");
+    emptyState.style.display = "none";
 
-    const completeButton = document.createElement("button");
-    completeButton.classList.add("delete-button");
+    const note = document.createElement("article");
+    note.classList.add("note");
 
-    const title = document.createElement("strong");
-    title.textContent = taskInput.value;
-
-    const description = document.createElement("p");
-    description.textContent = taskDescription.value;
+    const noteTitle = document.createElement("h3")
+    noteTitle.textContent = titleInput.value;
+    note.appendChild(noteTitle);
+    
+    const noteContent = document.createElement("p");
+    noteContent.textContent = contentInput.value;
+    note.appendChild(noteContent);
+    
+    const footer = document.createElement("div");
+    footer.classList.add("note-footer");
 
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
-    editButton.classList.add("task-button");
+    editButton.classList.add("edit-button");
 
-    const deleteTaskButton = document.createElement("button");
-    deleteTaskButton.textContent = "Delete";
-    deleteTaskButton.classList.add("task-button");
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add("delete-button");
 
-    completeButton.addEventListener("click", function () {
-        newTask.classList.toggle("completed");
-        completeButton.classList.toggle("completed");
-    });
+    footer.appendChild(editButton);
+    footer.appendChild(deleteButton);
 
-    editButton.addEventListener("click", function () {
+    note.appendChild(footer);
+    noteList.appendChild(note);
+    noteForm.reset();
+    notePanel.classList.remove("open");
 
-        const newTitle = prompt(
-            "Edit title:",
-            title.textContent
-        );
-
-        const newDescription = prompt(
-            "Edit description:",
-            description.textContent
-        );
-
-        if (newTitle !== null && newTitle.trim() !== "") {
-            title.textContent = newTitle;
-        }
-
-        if (newDescription !== null) {
-            description.textContent = newDescription;
-        }
-    });
-
-    deleteTaskButton.addEventListener("click", function () {
- if (confirm("Delete this task?")) {
-        newTask.remove();
-        }
-    });
-
-    const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("button-container");
-
-    buttonContainer.appendChild(editButton);
-    buttonContainer.appendChild(deleteTaskButton);
-
-    newTask.appendChild(completeButton);
-    newTask.appendChild(title);
-    newTask.appendChild(description);
-    newTask.appendChild(buttonContainer);
-
-    taskList.appendChild(newTask);
-
-    taskInput.value = "";
-    taskDescription.value = "";
 });
