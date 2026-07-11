@@ -1,3 +1,5 @@
+console.log("Script loaded");
+
 const addButton = document.getElementById("addButton");
 const cancelButton = document.getElementById("cancelButton");
 const notePanel = document.getElementById("notePanel");
@@ -8,7 +10,11 @@ const emptyState = document.getElementById("emptyState");
 const titleInput = document.getElementById("title");
 const contentInput = document.getElementById("content");
 
+console.log(addButton);
+console.log(notePanel);
+
 addButton.addEventListener("click", function () {
+console.log("Button clicked");
     notePanel.classList.add("open");
 });
 
@@ -19,15 +25,15 @@ cancelButton.addEventListener("click", function () {
 
 noteForm.addEventListener("submit", function (event) {
     event.preventDefault();
+
     if (titleInput.value.trim() === "") {
         alert("Please enter a title.");
         return;
 }
 
     if (contentInput.value.trim() === "") {
-            alert("Please enter some content.");
-            return;
-    }
+        alert("Please enter some content.");
+        return;
     }
 
     emptyState.style.display = "none";
@@ -61,5 +67,19 @@ noteForm.addEventListener("submit", function (event) {
     noteList.appendChild(note);
     noteForm.reset();
     notePanel.classList.remove("open");
+
+editButton.addEventListener("click", function () {
+        titleInput.value = noteTitle.textContent;
+        contentInput.value = noteContent.textContent;
+        notePanel.classList.add("open");
+        noteList.removeChild(note);
+    });
+
+    deleteButton.addEventListener("click", function () {
+        noteList.removeChild(note);
+        if (noteList.children.length === 0) {
+            emptyState.style.display = "block";
+        }
+    }); 
 
 });

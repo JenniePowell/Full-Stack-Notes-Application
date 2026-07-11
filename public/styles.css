@@ -1,10 +1,9 @@
-/* ---------- Base ---------- */
+/*  Base  */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    max-width: 700px;
 }
 
 :root {
@@ -26,7 +25,7 @@ body {
     line-height: 1.5;
 }
 
-/* ---------- Layout ---------- */
+/*  Layout  */
 
 .main-content {
     width: min(750px, 92%);
@@ -39,10 +38,10 @@ h1 {
     margin-bottom: 2rem;
 }
 
-/* ---------- Panels ---------- */
+/*  Panels  */
 
 .widget,
-.task-panel {
+.note-panel {
     background: var(--surface);
     border-radius: var(--radius);
     padding: 1.75rem;
@@ -50,15 +49,15 @@ h1 {
     margin-bottom: 1.5rem;
 }
 
-.task-panel {
+.note-panel {
     display: none;
 }
 
-.task-panel.open {
+.note-panel.open {
     display: block;
 }
 
-/* ---------- Form ---------- */
+/*  Form  */
 
 label {
     display: block;
@@ -89,9 +88,10 @@ textarea:focus {
     box-shadow: 0 0 0 4px rgba(220,76,62,.12);
 }
 
-/* ---------- Buttons ---------- */
+/*  Buttons  */
 
-.task-button {
+.note-button 
+.secondary-button{
     margin-top: 1.5rem;
     padding: .9rem 1.5rem;
     border: none;
@@ -104,12 +104,12 @@ textarea:focus {
     transition: .2s ease;
 }
 
-.task-button:hover {
+.note-button:hover {
     background: var(--primary-hover);
     transform: translateY(-1px);
 }
 
-/* ---------- Floating Add Button ---------- */
+/*  Floating Add Button  */
 
 .circle-button {
     position: fixed;
@@ -142,38 +142,41 @@ textarea:focus {
     background: var(--primary-hover);
 }
 
-/* ---------- Notes ---------- */
+/*  Notes  */
 
-#taskList {
-    list-style: none;
-    padding: 0;
+#noteList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
 }
 
-#taskList li {
-    background: white;
-    border: 1px solid var(--border);
+.note {
+  background: white;
+  border: 1px solid var(--border);
     border-radius: 14px;
     padding: 1.2rem 1.4rem;
     margin-bottom: 1rem;
     transition: .2s ease;
 }
 
-#taskList li:hover {
+.note:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow);
 }
 
-#taskList strong {
+.note strong {
     display: block;
     font-size: 1.05rem;
     margin-bottom: .4rem;
 }
 
-#taskList span {
+.note p {
     color: var(--muted);
 }
 
-/* ---------- Actions ---------- */
+/* Actions */
 
 .button-container {
     display: flex;
@@ -182,20 +185,22 @@ textarea:focus {
 }
 
 .button-container button {
-    border: none;
-    background: none;
-    color: var(--primary);
-    font: inherit;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 0;
+  border: none;   
+  background: var(--primary);
+  border-radius: 50px;
+  color: white;    
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 15px;
+  min-width: 180px;
 }
 
 .button-container button:hover {
     text-decoration: underline;
 }
 
-/* ---------- Complete Button ---------- */
+/* Delete Button */
 
 .delete-button {
     width: 22px;
@@ -215,7 +220,7 @@ textarea:focus {
     background: rgba(220,76,62,.08);
 }
 
-/* ---------- Completed ---------- */
+/* Completed */
 
 .completed {
     opacity: .55;
@@ -226,7 +231,7 @@ textarea:focus {
     text-decoration: line-through;
 }
 
-/* ---------- Mobile ---------- */
+/*  Mobile  */
 
 @media (max-width: 600px) {
 
@@ -240,7 +245,7 @@ textarea:focus {
     }
 
     .widget,
-    .task-panel {
+    .note-panel {
         padding: 1.2rem;
     }
 
